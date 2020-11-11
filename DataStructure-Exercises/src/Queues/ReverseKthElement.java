@@ -1,71 +1,37 @@
 package Queues;
 
-import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 public class ReverseKthElement{
 
-    static Queue<Integer> queue;
 
-    // Function to reverse the first
-    // K elements of the Queue
-    static void reverseQueueFirstKElements(int k)
+    static void reverseQueueFirstKElements(Queue<Integer> queue,int k)
     {
-        if (queue.isEmpty() == true
-                || k > queue.size())
-            return;
-        if (k <= 0)
-            return;
+        Stack<Integer> stack = new Stack<>();
 
-        Stack<Integer> stack = new Stack<Integer>();
-
-        // Push the first K elements into a Stack
+        // Push the first K elements to Stack
         for (int i = 0; i < k; i++) {
-            stack.push(queue.peek());
-            queue.remove();
+            stack.push(queue.remove());
         }
 
-        // Enqueue the contents of stack
-        // at the back of the queue
+        // take from stack to enqueue
         while (!stack.empty()) {
-            queue.add(stack.peek());
-            stack.pop();
+            queue.add(stack.pop());
         }
-
-        // Remove the remaining elements and enqueue
-        // them at the end of the Queue
+        // Remove the remaining elements and add them again same queue
         for (int i = 0; i < queue.size() - k; i++) {
-            queue.add(queue.peek());
-            queue.remove();
+            queue.add(queue.remove());
         }
+        //Print
+        Print(queue);
     }
 
-    // Utility Function to print the Queue
-    static void Print()
+    static void Print(Queue<Integer> queue)
     {
         while (!queue.isEmpty()) {
-            System.out.print(queue.peek() + " ");
-            queue.remove();
+            System.out.print(queue.remove() + " ");
         }
     }
 
-    // Driver code
-    public static void main(String args[])
-    {
-        queue = new LinkedList<Integer>();
-        queue.add(10);
-        queue.add(20);
-        queue.add(30);
-        queue.add(40);
-        queue.add(50);
-        queue.add(60);
-        queue.add(70);
-        queue.add(80);
-        queue.add(90);
-        queue.add(100);
 
-        int k = 5;
-        reverseQueueFirstKElements(k);
-        Print();
-    }
 }
