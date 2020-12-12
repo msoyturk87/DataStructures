@@ -102,5 +102,49 @@ public class MyLinkedList {
         else
             System.out.println(a.value + ", " + a.next.value);
     }
+    // mine
+    public void addSortedOrder(int value){
+        Node searchedOne=new Node(value);
+        Node temp=null;
+        Node current=first;
+        if(isEmpty()) {
+            first = last = searchedOne;
+        }
+        while(current.next!=null){
+
+            if(current.next.value>=searchedOne.value){
+                temp=current.next;
+               current.next=searchedOne;
+               searchedOne.next=temp;
+
+
+            }
+            else
+                current=current.next;
+
+        }}
+    // Fatih
+    public void insertInOrder(int item) {
+        var node = new Node(item);
+        Node current;
+        if (isEmpty())
+            first = last = node;
+        else if (item<=first.value){
+            node.next=first;
+            first=node;
+        }
+        else {
+            current=first;
+            while((current.next!=null)&&(node.value>current.next.value)) current=current.next;
+            if (current.next==null) {// insertion after last
+                current.next=node;
+                last=node;
+            } else {
+                node.next=current.next;
+                current.next=node;
+            }
+        }
+        size++;
+    }
 
 }
