@@ -21,7 +21,7 @@ public class Tree {
         if (root==null) {root=node;
         return;}
         // if tree is not empty
-    Node current=root;
+     Node current=root;
         while (true){
             // check if less
             if (value<current.value) {
